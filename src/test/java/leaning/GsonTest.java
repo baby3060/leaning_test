@@ -8,14 +8,35 @@ import static org.testng.Assert.*;
 
 import static org.hamcrest.CoreMatchers.*;
 
+import java.util.*;
+
 import json.*;
 import json.gson.GsonTester;
 
 public class GsonTest {
+    GsonTester tester;
+
+    List<Student> toList;
+
+    @BeforeClass
+    public void init() {
+        
+        toList = new ArrayList<Student>(Arrays.asList(
+            new Student("101", "학생1", 15, 2),
+            new Student("102", "학생2", 16, 3),
+            new Student("103", "학생3", 14, 1),
+            new Student("104", "학생4", 15, 2),
+            new Student("105", "학생5", 16, 2)
+        ));
+    }
+
+    @BeforeTest
+    public void setUp() {
+        tester  = new GsonTester();
+    }
+
     @Test 
     public void convertToObject() {
-        GsonTester tester  = new GsonTester();
-
         Student student = new Student();
         student.setNo("101");
         student.setName("학생1");
@@ -25,6 +46,28 @@ public class GsonTest {
         Student convertStudent = tester.convertStringToObject("101", "학생1", 15, 3);
 
         isSameStudent(student, convertStudent);
+    }
+
+    @Test
+    public void convertToList() {
+        String jsonString = makeJsonString();
+
+        List<Student> result = tester.convertStringToList(jsonString);
+
+        assertEquals(toList.size(), result.size());
+    }
+
+    private String makeJsonString() {
+        String jsonString = "[";
+
+        for (Student student : toList) {
+            jsonString = jsonString + "{\"no\":\""+ student.getNo() + "\",\"name\":\""+ student.getName() + "\", \"age\" : "+ student.getAge() + ", \"grade\" : "+ student.getGrade() + "},";
+        }
+
+        jsonString = jsonString.substring(0, jsonString.lastIndexOf(","));
+
+        jsonString = jsonString + "]";
+        return jsonString;
     }
 
     private void isSameStudent(Student source, Student target) {
