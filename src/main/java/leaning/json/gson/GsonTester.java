@@ -42,4 +42,13 @@ public class GsonTester {
         return result;
     }
 
+    // 입력받은 객체를 Json문자열로 변환
+    public String convertObjectTostring(Student student) {
+        Gson gson = new Gson(); 
+
+        String jsonString = gson.toJson(student);
+
+        return jsonString;
+    }
+
 }

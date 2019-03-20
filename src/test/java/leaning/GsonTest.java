@@ -57,11 +57,23 @@ public class GsonTest {
         assertEquals(toList.size(), result.size());
     }
 
+    @Test
+    public void convertObjectTostring() {
+        String makeJsonString = "";
+        String itsJsonString = "";
+        for( Student student : toList ) {
+            itsJsonString = "{\"no\":\""+ student.getNo() + "\",\"name\":\""+ student.getName() + "\",\"age\":"+ student.getAge() + ",\"grade\":"+ student.getGrade() + "}";
+            makeJsonString = tester.convertObjectTostring(student);
+
+            assertEquals(itsJsonString, makeJsonString);
+        }
+    }
+
     private String makeJsonString() {
         String jsonString = "[";
 
         for (Student student : toList) {
-            jsonString = jsonString + "{\"no\":\""+ student.getNo() + "\",\"name\":\""+ student.getName() + "\", \"age\" : "+ student.getAge() + ", \"grade\" : "+ student.getGrade() + "},";
+            jsonString = jsonString + "{\"no\":\""+ student.getNo() + "\",\"name\":\""+ student.getName() + "\",\"age\":"+ student.getAge() + ",\"grade\":"+ student.getGrade() + "},";
         }
 
         jsonString = jsonString.substring(0, jsonString.lastIndexOf(","));
