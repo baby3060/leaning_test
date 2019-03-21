@@ -69,6 +69,18 @@ public class GsonTest {
         }
     }
 
+    @Test
+    public void parsingStringGetField() {
+        Student student = toList.get(0);
+        String thisFormat = String.format("no : %s, name : %s, age : %d, grade : %d", student.getNo(), student.getName(), student.getAge(), student.getGrade());
+
+        String itsJsonString = "{\"no\":\""+ student.getNo() + "\",\"name\":\""+ student.getName() + "\",\"age\":"+ student.getAge() + ",\"grade\":"+ student.getGrade() + "}";
+
+        String returnFormat = tester.parsingStringGetField(itsJsonString);
+
+        assertEquals(thisFormat, returnFormat);
+    }
+
     private String makeJsonString() {
         String jsonString = "[";
 

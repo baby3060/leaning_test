@@ -9,6 +9,8 @@ import com.google.gson.reflect.TypeToken;
 
 import com.google.gson.Gson; 
 import com.google.gson.GsonBuilder;  
+import com.google.gson.JsonElement;  
+import com.google.gson.JsonParser;  
 
 public class GsonTester {
     // Json 형식 문자열을 객체로 변환
@@ -51,5 +53,23 @@ public class GsonTester {
         return jsonString;
     }
 
+    // 입력받은 문자열을 객체로 변환하지 않고 곧바로, 필드를 가져오기
+    public String parsingStringGetField(String jsonString) {
+        Gson gson = new Gson();
+
+        String result = "";
+
+        JsonParser parser = new JsonParser();
+	    JsonElement element = parser.parse(jsonString);
+
+        String no = element.getAsJsonObject().get("no").getAsString();
+        String name = element.getAsJsonObject().get("name").getAsString();
+        int age = element.getAsJsonObject().get("age").getAsInt();
+        int grade = element.getAsJsonObject().get("grade").getAsInt();
+
+        result = String.format("no : %s, name : %s, age : %d, grade : %d", no, name, age, grade);
+
+        return result;
+    }
     
 }
