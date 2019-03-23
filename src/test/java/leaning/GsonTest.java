@@ -13,6 +13,8 @@ import java.util.*;
 import json.*;
 import json.gson.GsonTester;
 
+import com.google.gson.*; 
+
 public class GsonTest {
     GsonTester tester;
 
@@ -42,7 +44,7 @@ public class GsonTest {
         student.setName("학생1");
         student.setAge(15);
         student.setGrade(3);
-
+        
         Student convertStudent = tester.convertStringToObject("101", "학생1", 15, 3);
 
         isSameStudent(student, convertStudent);
@@ -79,6 +81,21 @@ public class GsonTest {
         String returnFormat = tester.parsingStringGetField(itsJsonString);
 
         assertEquals(thisFormat, returnFormat);
+    }
+
+    @Test
+    public void innerConvert() {
+        Student student = new Student("101", "학생1", 15, 2);
+        
+        Student.Results results = student.new Results();
+
+        results.setKorean(80);
+        results.setMath(88);
+        results.setEnglish(100);
+
+        student.setResults(results);
+
+
     }
 
     private String makeJsonString() {

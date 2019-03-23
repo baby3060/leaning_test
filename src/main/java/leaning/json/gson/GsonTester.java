@@ -7,10 +7,7 @@ import java.util.*;
 import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
 
-import com.google.gson.Gson; 
-import com.google.gson.GsonBuilder;  
-import com.google.gson.JsonElement;  
-import com.google.gson.JsonParser;  
+import com.google.gson.*; 
 
 public class GsonTester {
     // Json 형식 문자열을 객체로 변환
@@ -46,7 +43,10 @@ public class GsonTester {
 
     // 입력받은 객체를 Json문자열로 변환
     public String convertObjectTostring(Student student) {
-        Gson gson = new Gson(); 
+        GsonBuilder builder = new GsonBuilder();
+        // builder.setPrettyPrinting();
+
+        Gson gson = builder.create();
 
         String jsonString = gson.toJson(student);
 
@@ -60,6 +60,7 @@ public class GsonTester {
         String result = "";
 
         JsonParser parser = new JsonParser();
+        // JsonElement로 반환
 	    JsonElement element = parser.parse(jsonString);
 
         String no = element.getAsJsonObject().get("no").getAsString();
@@ -72,4 +73,27 @@ public class GsonTester {
         return result;
     }
     
+    // 입력받은 List를 JsonArray로 변환
+    public JsonArray convertListToArray(List<Student> list) {
+        Gson gson = new Gson();
+
+        JsonElement element = gson.toJsonTree(list, new TypeToken<List<Student>>() {}.getType());
+
+        if (! element.isJsonArray()) {
+            throw new RuntimeException();
+        } else {
+            return element.getAsJsonArray();
+        }
+    }
+
+    // 입력받은 JsonArray를 트리형태로 JsonObject에 포함시키기
+    public JsonObject treeJsonObjWrapJArray(JsonElement element) {
+        JsonObject obj = new JsonObject();
+
+        obj.addProperty("description", "설명");
+        obj.add("treeIn", element);
+
+        return obj;
+    }
+
 }
