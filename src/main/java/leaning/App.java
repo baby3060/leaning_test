@@ -28,5 +28,8 @@ public class App {
         JsonObject jsonObject = tester.treeJsonObjWrapJArray(jsonArr);
 
         System.out.println(jsonObject);
+
+        jsonArr = jsonObject.getAsJsonArray("treeIn");
+        System.out.println(jsonArr);
     }
 }
