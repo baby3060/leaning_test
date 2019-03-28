@@ -31,5 +31,17 @@ public class App {
 
         jsonArr = jsonObject.getAsJsonArray("treeIn");
         System.out.println(jsonArr);
+
+        Student student = new Student();
+
+        student.setNo("101");
+
+        String nullStr = tester.nullAbleFilld(student);
+
+        System.out.println(nullStr);
+
+        String notNullStr = tester.convertObjectTostring(student);
+
+        System.out.println(notNullStr);
     }
 }

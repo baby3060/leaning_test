@@ -96,4 +96,19 @@ public class GsonTester {
         return obj;
     }
 
+    /**
+     * 비어있는 값 Null로 표현(그냥 toJson으로 변환할 경우와 비교해보기)
+     */
+    public String nullAbleFilld(Student student) {
+        GsonBuilder builder = new GsonBuilder();
+        
+        builder.serializeNulls();
+        builder.setPrettyPrinting(); 
+        Gson gson = builder.create();  
+
+        String jsonString = gson.toJson(student);
+
+        return jsonString;
+    }
+
 }
