@@ -145,4 +145,61 @@ public class DomParser {
         }
     }
 
+    // XML 파일 변경하여 새로운 파일 만들기
+    public void modifyXML() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File newFile = null;
+
+        try {
+            newFile = new File("output/newFile.xml");
+
+            if(newFile.exists()) {
+                newFile.delete();
+            }
+
+            File inpFile = new File(classLoader.getResource("xml_using.xml").getFile());
+
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+
+            Document document = builder.parse(inpFile);
+
+            Node classNode = document.getFirstChild();
+
+            // 문서의 태그 리스트를 불러옴
+            NodeList studentList = document.getElementsByTagName("student");
+
+            Node node = null;
+
+            Element element = null;
+
+            for(int i = 0; i < studentList.getLength(); i++) {
+                node = studentList.item(i);
+
+                if( node.getNodeType() == Node.ELEMENT_NODE ) {
+                    element = (Element)node;
+
+                    if( element.getAttribute("no").equals("101") ) {
+                        element.getElementsByTagName("name").item(0).setTextContent("학생1(수정)");
+                        element.getElementsByTagName("name").item(1).setTextContent("수정김길동(수정)");
+                    } else {
+                        classNode.removeChild(node);
+                        i--;
+                    }
+                } 
+            }
+
+            // 변환기 생성
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+
+            DOMSource source = new DOMSource(document);
+
+            // 파일로 내보냄
+            StreamResult result = new StreamResult(newFile);
+            transformer.transform(source, result);
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
