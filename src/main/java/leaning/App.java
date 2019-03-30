@@ -17,6 +17,6 @@ public class App {
     public static void main(String[] args) {
         DomParser parser = new DomParser();
 
-        parser.parsingTest();
+        parser.fileCreate();
     }
 }

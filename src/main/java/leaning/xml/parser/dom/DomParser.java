@@ -3,12 +3,20 @@ package leaning.xml.parser.dom;
 import java.io.File;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
+// 파일 생성 시 필요
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 public class DomParser {
+    
     public void parsingTest() {
         ClassLoader classLoader = getClass().getClassLoader();
         Node node = null;
@@ -75,7 +83,66 @@ public class DomParser {
 
         } catch(Exception e) {
             e.printStackTrace();
-        }
-        
+        }   
     }
+
+    // XML 파일 생성
+    public void fileCreate() {
+        File newFile = null;
+
+        try {
+            newFile = new File("output/newFile.xml");
+
+            if(newFile.exists()) {
+                newFile.delete();
+            }
+
+            // 팩토리 생성 후 빌더 생성
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+
+            // 문서 생성
+            Document doc = builder.newDocument();
+
+            Element rootElement = doc.createElement("class");
+            doc.appendChild(rootElement);
+
+            Element studentElement1 = doc.createElement("student");
+            Attr noAttr = doc.createAttribute("no");
+            noAttr.setValue("101");
+
+            studentElement1.setAttributeNode(noAttr);
+
+            Element name1_1 = doc.createElement("name");
+            name1_1.appendChild(doc.createTextNode("학생1"));
+            Element name1_2 = doc.createElement("name");
+            name1_2.appendChild(doc.createTextNode("김길동"));
+
+            studentElement1.appendChild(name1_1);
+            studentElement1.appendChild(name1_2);
+
+
+            Element studentElement2 = doc.createElement("student");
+            Attr noAttr2 = doc.createAttribute("no");
+            noAttr2.setValue("102");
+
+            studentElement2.setAttributeNode(noAttr2);
+
+            rootElement.appendChild(studentElement1);
+            rootElement.appendChild(studentElement2);
+
+
+            // 변환기 생성
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+
+            DOMSource source = new DOMSource(doc);
+
+            // 파일로 내보냄
+            StreamResult result = new StreamResult(newFile);
+            transformer.transform(source, result);
+            
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
