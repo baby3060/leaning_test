@@ -1,0 +1,39 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<class>
+    <student no="101">
+        <name>학생1</name>
+        <name>홍길동</name>
+        <math>90</math>
+        <english>70</english>
+    </student>
+    <student no="102">
+        <name>학생2</name>
+        <name>조길동</name>
+        <math>60</math>
+        <english>80</english>
+    </student>
+    <student no="103">
+        <name>학생3</name>
+        <name>이길동</name>
+        <math>95</math>
+        <english>100</english>
+    </student>
+    <student no="104">
+        <name>학생4</name>
+        <name>최길동</name>
+        <math>100</math>
+        <english>70</english>
+    </student>
+    <student no="105">
+        <name>학생5</name>
+        <name>김길동</name>
+        <math>50</math>
+        <english>75</english>
+    </student>
+    <student no="106">
+        <name>학생6</name>
+        <name>박길동</name>
+        <math>85</math>
+        <english>100</english>
+    </student>
+</class>
