@@ -17,8 +17,8 @@ public class App {
     public static void main(String[] args) {
         GsonTester tester = new GsonTester();
 
-        Student parser = tester.convertJsonFileToObject();
+        List<Student> list = tester.convertJsonFileToList();
 
-        System.out.println(parser);
+        System.out.println(list);
     }
 }

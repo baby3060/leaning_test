@@ -8,7 +8,7 @@ import java.util.*;
 
 import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
-
+import com.google.gson.stream.JsonReader;
 import com.google.gson.*; 
 
 public class GsonTester {
@@ -136,6 +136,31 @@ public class GsonTester {
         }
 
         return student;
+    }
+
+
+    /**
+     * Json 파일 읽어서 List로 변환
+     */
+    public List<Student> convertJsonFileToList() {
+        List<Student> list = new ArrayList<Student>();
+        ClassLoader classLoader = getClass().getClassLoader();
+        Gson gson = new Gson();
+
+        final Type STUDENT_TYPE = new TypeToken<Collection<Student>>(){}.getType();
+
+        try {
+            BufferedReader brreader = new BufferedReader(new InputStreamReader(new FileInputStream(new File( classLoader.getResource("sampleList.json").getFile())),"UTF8"));
+
+            JsonElement json = gson.fromJson(brreader, JsonElement.class);
+
+            String result = gson.toJson(json);
+
+            list = gson.fromJson(result, STUDENT_TYPE); 
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
 }
