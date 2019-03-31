@@ -1,5 +1,7 @@
 package json.gson;
 
+import java.io.*;
+
 import json.Student;
 
 import java.util.*;
@@ -109,6 +111,31 @@ public class GsonTester {
         String jsonString = gson.toJson(student);
 
         return jsonString;
+    }
+
+    /**
+     * Json 파일 읽어서 Student로 변환
+     */
+    public Student convertJsonFileToObject() {
+        ClassLoader classLoader = getClass().getClassLoader();
+
+        Gson gson = new Gson();
+
+        Student student = new Student();
+
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File( classLoader.getResource("sample.json").getFile())),"UTF8"));
+
+            JsonElement json = gson.fromJson(reader, JsonElement.class);
+
+            String result = gson.toJson(json);
+
+            student = gson.fromJson(result, Student.class);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return student;
     }
 
 }

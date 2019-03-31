@@ -15,8 +15,10 @@ import leaning.xml.parser.dom.*;
 public class App {
 
     public static void main(String[] args) {
-        DomParser parser = new DomParser();
+        GsonTester tester = new GsonTester();
 
-        parser.modifyXML();
+        Student parser = tester.convertJsonFileToObject();
+
+        System.out.println(parser);
     }
 }

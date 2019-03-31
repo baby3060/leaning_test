@@ -11,7 +11,12 @@
 > getAs~ 메소드를 이용해서 Element를 구성하는 값을 읽어올 수 있다.
 
 ### Jackson
-### 
+### JSON.Simple
+
+>> JSON 파싱 시 사용하는 대표적인 라이브러리 GSON, Jackson, JSON.Simple 파싱 비교(왼쪽이 가장 좋음)
+>>> 참조사이트 : https://blog.overops.com/the-ultimate-json-library-json-simple-vs-gson-vs-jackson-vs-json/
+>>>> JSON 크기 클 때 : Jackson > JSON.simple > GSON
+>>>> JSON 크기 작을 때 : GSON > JSON.simple > Jackson 
 
 <hr />
 

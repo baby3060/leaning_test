@@ -9,8 +9,8 @@ import lombok.*;
 public class Student {
     @NonNull private String no;
     @NonNull private String name;
-    @NonNull private int age;
-    @NonNull private int grade;
+    private int age;
+    private int grade;
     private Results results;
 
     public Student() { }

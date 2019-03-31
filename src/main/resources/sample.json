@@ -1,0 +1,11 @@
+{
+    "no" : "101",
+    "name" : "최길동",
+    "age" : 16,
+    "grade" : 3,
+    "results" : {
+        "korean" : 70,
+        "math" : 90,
+        "english" : 100
+    }
+} 
