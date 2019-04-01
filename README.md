@@ -15,8 +15,12 @@
 
 >> JSON 파싱 시 사용하는 대표적인 라이브러리 GSON, Jackson, JSON.Simple 파싱 비교(왼쪽이 가장 좋음)
 >>> 참조사이트 : https://blog.overops.com/the-ultimate-json-library-json-simple-vs-gson-vs-jackson-vs-json/
->>>> JSON 크기 클 때 : Jackson > JSON.simple > GSON
->>>> JSON 크기 작을 때 : GSON > JSON.simple > Jackson 
+>>>> JSON 크기 클 때 : Jackson > GSON
+>>>> JSON 크기 작을 때 : GSON > Jackson 
+>>>>> 해당 사이트에서는 세 개의 라이브러리를 가지고, 검사를 하였으나, JSON.simple의 경우 업데이트가 잘 안 되고 있어서 여기에서는 뺐음.
+>>> 다른 참조사이트 : https://www.developer.com/lang/jscript/top-7-open-source-json-binding-providers-available-today.html (2014년 자료)
+>>>> 작은 용량 TOP 3 : GSON, genson, FlexJson(직렬화 시간 + 역직렬화 시간 => GSON과 genson의 경우 직렬화, 역직렬화 모두 3위 안에 듦, FlexJson의 경우 직렬화는 가장 빠르지만, 역직렬화가 느림)
+>>>> 큰 용량 TOP  3 : JackSon, JSON-lib, genson(직렬화 시간 + 역직렬화 시간 => Jackson은 직렬화, 역직렬화 모두 빠른 편, JSON-lib는 직렬화는 그렇게 빠른 편이 아니지만, 역직렬화가 상당히 빠름)
 
 <hr />
 
