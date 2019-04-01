@@ -2,6 +2,8 @@ package json;
 
 import lombok.*;
 
+import java.util.*;
+
 @Setter
 @Getter
 @ToString
@@ -12,6 +14,7 @@ public class Student {
     private int age;
     private int grade;
     private Results results;
+    private List<String> hobby;
 
     public Student() { }
 

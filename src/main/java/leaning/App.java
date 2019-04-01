@@ -20,5 +20,9 @@ public class App {
         List<Student> list = tester.convertJsonFileToList();
 
         System.out.println(list);
+
+        Student student = tester.convertJsonFileToObject();
+
+        System.out.println(student);        
     }
 }

@@ -119,11 +119,16 @@ public class GsonTester {
     public Student convertJsonFileToObject() {
         ClassLoader classLoader = getClass().getClassLoader();
 
-        Gson gson = new Gson();
+        GsonBuilder builder = new GsonBuilder();
+        
+        builder.serializeNulls();
+        builder.setPrettyPrinting(); 
+        Gson gson = builder.create();  
 
         Student student = new Student();
 
         try {
+            // InputStreamReader를 사용해서 한글 깨짐 해결(UTF-8 인코딩)
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File( classLoader.getResource("sample.json").getFile())),"UTF8"));
 
             JsonElement json = gson.fromJson(reader, JsonElement.class);
@@ -145,7 +150,12 @@ public class GsonTester {
     public List<Student> convertJsonFileToList() {
         List<Student> list = new ArrayList<Student>();
         ClassLoader classLoader = getClass().getClassLoader();
-        Gson gson = new Gson();
+        
+        GsonBuilder builder = new GsonBuilder();
+        
+        builder.serializeNulls();
+        builder.setPrettyPrinting(); 
+        Gson gson = builder.create();  
 
         final Type STUDENT_TYPE = new TypeToken<Collection<Student>>(){}.getType();
 
