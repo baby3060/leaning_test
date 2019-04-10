@@ -1,0 +1,36 @@
+[
+    {
+        "gubun" : "user",
+        "sqlMap" : [
+            {
+                "key" : "addUser",
+                "value" : "Insert Into USER()"
+            },
+            {
+                "key" : "updateUser",
+                "value" : "Update USER Set "
+            },
+            {
+                "key" : "deleteUser",
+                "value" : "Delete From USER"
+            }
+        ]
+    }, 
+   {
+        "gubun" : "confirm",
+        "sqlMap" : [
+            {
+                "key" : "addConfirm",
+                "value" : "Insert Into CONFIRM()"
+            },
+            {
+                "key" : "updateConfirm",
+                "value" : "Update CONFIRM Set "
+            },
+            {
+                "key" : "deleteConfirm",
+                "value" : "Delete From CONFIRM"
+            }
+        ]
+    }
+]
