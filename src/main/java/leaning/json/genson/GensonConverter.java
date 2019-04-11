@@ -17,54 +17,54 @@ public class GensonConverter {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File( classLoader.getResource("sqlmap.json").getFile())),"UTF8"));
             
-            List<Map<String, String>> persons = genson.deserialize(reader, List.class);
-
-            List<Map<String, String>> sqlMaps = new ArrayList<Map<String, String>>();
+            List<Map<String, String>> sqlMapList = genson.deserialize(reader, List.class);
 
             Map<String, String> hashMap = null;
-            Set<Entry<String, String>> keys = null;
+            List<Map<String, String>> sqlList = null;
+
             String gubun = "";
-            Iterator<Entry<String, String>> iterator = null;
-            Entry<String, String> entry = null;
-            for(int i = 0; i < persons.size(); i++) {
-                hashMap = persons.get(i);
+            
+            String sqlJsonString = "";
+            
+            SqlMapModel model = null;
 
-                keys = hashMap.entrySet();
-                iterator = keys.iterator();
+            for(int i = 0; i < sqlMapList.size(); i++) {
+                hashMap = sqlMapList.get(i);
+
+                model = new SqlMapModel();
+
+                model.setGubun(hashMap.get("gubun"));
+                hashMap.remove("gubun");
                 
-                while(iterator.hasNext()) {
-                    
-                    entry = iterator.next();
+                Map<String, String> modelMap = new HashMap<String, String>();
 
-                    if( entry.getKey().equals("gubun") ) {
-                        System.out.println(entry.getValue());
-                    } else {
-                        String str = entry.toString();
-                        
-                        str = str.substring(str.indexOf("[") + 1, str.lastIndexOf("]"));
-                        // System.out.println(str);
+                // Parsing
+                // "부터 "key" 앞의 ,까지
+                sqlJsonString = hashMap.toString();
+                sqlJsonString = sqlJsonString.substring(sqlJsonString.indexOf("sqlMap=") + 7, sqlJsonString.lastIndexOf("}"));
+                sqlJsonString = sqlJsonString.replace("=", ":");
+                sqlJsonString = sqlJsonString.replace("value", "\"value\"").replace("key", "\"key\"");
+                sqlJsonString = sqlJsonString.replace(":", ":\"");
+                sqlJsonString = sqlJsonString.replace(", \"key\"", "\", \"key\"");
+                sqlJsonString = sqlJsonString.replace("}", "\"}");
+                // Parsing
 
-                        sqlMaps = new ArrayList<Map<String, String>>();
+                // System.out.println(sqlJsonString);
 
-                        String[] sql = str.split("}");
+                sqlList = genson.deserialize(sqlJsonString, new GenericType<List<Map<String, String>>>(){});
 
-                        for( int inner = 0; inner < sql.length; inner++ ) {
-                            Map<String, String> maps = new HashMap<String, String>();
+                for( int sqlIndex = 0; sqlIndex < sqlList.size(); sqlIndex++ ) {
+                    Map<String, String> innerMap = sqlList.get(sqlIndex);
+                    System.out.println(innerMap);
 
-                            String innerStr = sql[inner].replace(", {", "").replace("{", "");
+                    System.out.println(innerMap.get("key"));
+                    System.out.println(innerMap.get("value"));
+                    modelMap.put(innerMap.get("key"), innerMap.get("value"));
 
-                            String key = innerStr.substring(innerStr.indexOf("key=") + 4);
-                            
-                            String value = innerStr.substring(innerStr.indexOf("value=") + 6, innerStr.indexOf("key=") - 2).trim();
-
-                            maps.put(key, value);
-
-                            sqlMaps.add(maps);
-                        }
-
-                        System.out.println(sqlMaps);
-                    }
                 }
+
+                model.setSqlMap(modelMap);
+                System.out.println(model);
             }
 
         } catch(Exception e) {

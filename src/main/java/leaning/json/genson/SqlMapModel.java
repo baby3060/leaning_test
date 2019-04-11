@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class SqlMapModel {
-    private String key;
+    private String gubun;
     private Map<String, String> sqlMap = new HashMap<String, String>();
 
     public void addSql(String key, String value) {
@@ -16,16 +16,16 @@ public class SqlMapModel {
         }
     }
 
-    public String getKey() {
-        return key;
+    public String getGubun() {
+        return gubun;
     }
 
     public Map<String, String> getSqlMap() {
         return sqlMap;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setGubun(String gubun) {
+        this.gubun = gubun;
     }
 
     public void setSqlMap(Map<String, String> sqlMap) {
@@ -41,7 +41,7 @@ public class SqlMapModel {
         if( obj instanceof SqlMapModel ) {
             SqlMapModel temp = (SqlMapModel)obj;
 
-            return this.key.equals(temp.getKey());
+            return this.gubun.equals(temp.getGubun());
         } else {
             return false;
         }
@@ -51,7 +51,7 @@ public class SqlMapModel {
     public int hashCode() {
         int result = 17;
 
-        result = result + this.key.hashCode();
+        result = result + this.gubun.hashCode();
 
         return result;
     }
@@ -73,6 +73,6 @@ public class SqlMapModel {
             mapStr.append(")");
         }
 
-        return "key is " + key + ", sqlMap(" + sqlMap.size() + ") : [" + mapStr.toString() + "]";
+        return "key is " + gubun + ", sqlMap(" + sqlMap.size() + ") : [" + mapStr.toString() + "]";
     }
 }
