@@ -9,6 +9,10 @@ import com.owlike.genson.Genson;
 import com.owlike.genson.GenericType;
 
 public class GensonConverter {
+
+    /**
+     * 억지로 파싱
+     */
     public void convertComplex() {
         Genson genson = new Genson();
 
@@ -73,5 +77,63 @@ public class GensonConverter {
             try { reader.close(); } catch(Exception E){}
         }
 
+    }
+
+    /**
+     * 변환해가면서 파싱(억지로 하는거 아님)
+     */
+    public void convertComplexNoParsing() {
+        Genson genson = new Genson();
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File( classLoader.getResource("sqlmap.json").getFile())),"UTF8"));
+            
+            List<Map<String, Object>> sqlMaps = genson.deserialize(reader, List.class);
+
+            // System.out.println(sqlMaps);
+            
+            Map<String, Object> tempSql = null;
+
+            String gubun = "";
+
+            List<Map<String, String>> sqlList = null;
+            Map<String, String> innerSqlMap = null;
+            Map<String, String> modelMap = null;
+
+            String key = "", sql = "";
+
+            for( int i = 0; i < sqlMaps.size(); i++ ) {
+                SqlMapModel model = new SqlMapModel();
+                modelMap = new HashMap<String, String>();
+                tempSql = sqlMaps.get(i);
+
+                gubun = (String)tempSql.get("gubun");
+
+                model.setGubun(gubun);
+
+                sqlList = ((List<Map<String, String>>)tempSql.get("sqlMap"));
+
+                for( int inner  = 0; inner < sqlList.size(); inner++ ) {
+                    
+                    innerSqlMap = sqlList.get(inner);
+                    
+                    key = innerSqlMap.get("key");
+                    sql = innerSqlMap.get("value");
+
+                    modelMap.put(key, sql);
+                }
+
+                model.setSqlMap(modelMap);
+
+                System.out.println(model);
+            }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try { reader.close(); } catch(Exception E){}
+        }
     }
 }
