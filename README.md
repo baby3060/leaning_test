@@ -12,6 +12,8 @@
 
 ### Jackson
 ### JSON.Simple
+### GENSON
+#### JSON(파일, 문자열)을 객체로 전환 deserialize, 객체를 JSON으로 전환 serialize
 
 >> JSON 파싱 시 사용하는 대표적인 라이브러리 GSON, Jackson, JSON.Simple 파싱 비교(왼쪽이 가장 좋음) <br />
 >>> 참조사이트 : https://blog.overops.com/the-ultimate-json-library-json-simple-vs-gson-vs-jackson-vs-json/ <br />

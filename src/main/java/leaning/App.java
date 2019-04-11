@@ -17,8 +17,8 @@ import leaning.xml.parser.sax.*;
 public class App {
 
     public static void main(String[] args) {
-        GensonConverter con = new GensonConverter();
+        GensonDataConverter con = new GensonDataConverter();
 
-        con.convertComplex();
+        con.convertData();
     }
 }

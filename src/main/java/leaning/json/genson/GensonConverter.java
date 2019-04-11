@@ -13,9 +13,9 @@ public class GensonConverter {
         Genson genson = new Genson();
 
         ClassLoader classLoader = getClass().getClassLoader();
-
+        BufferedReader reader = null;
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File( classLoader.getResource("sqlmap.json").getFile())),"UTF8"));
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File( classLoader.getResource("sqlmap.json").getFile())),"UTF8"));
             
             List<Map<String, String>> sqlMapList = genson.deserialize(reader, List.class);
 
@@ -70,7 +70,7 @@ public class GensonConverter {
         } catch(Exception e) {
             e.printStackTrace();
         } finally {
-            
+            try { reader.close(); } catch(Exception E){}
         }
 
     }
