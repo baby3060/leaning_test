@@ -9,12 +9,52 @@ import java.util.Map.Entry;
 
 import com.owlike.genson.Genson;
 import com.owlike.genson.GenericType;
+import com.owlike.genson.GensonBuilder;
 
 public class GensonConverter {
 
     public List<Object> listConvert() {
         Genson genson = new Genson();
         List<Object> result = genson.deserialize("[{\"age\" : 28, \"name\" : \"Foo\"}, {\"age\" : 29, \"name\" : \"Hoo\"}]", List.class);
+        return result;
+    }
+
+    public String mapObjectConvert() {
+        Genson genson = new Genson();
+
+        Random random = new Random();
+
+        String result = "";
+
+        List<Map> resultList = new ArrayList<Map>();
+
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+
+        int randInt = 0;
+        int nameInt = 0;
+
+        for( int i = 0; i < 10; i++ ) {
+            resultMap = new HashMap<String, Object>();
+            // 25 ~ 84
+            randInt = random.nextInt(60) + 25;
+            nameInt = random.nextInt(27) + 67;
+
+            resultMap.put("age", randInt);
+            resultMap.put("name", new Character((char)nameInt).toString() + "oo" );
+
+            resultList.add(resultMap);
+        }
+
+        result = genson.serialize(resultList);
+
+        return result;
+    }
+
+    public List<Map<String, Object>> onResultMsgConvertList(String convertStr) {
+        Genson genson = new Genson();
+
+        List<Map<String, Object>> result = genson.deserialize(convertStr, new GenericType<List<Map<String, Object>>>(){});
+
         return result;
     }
 

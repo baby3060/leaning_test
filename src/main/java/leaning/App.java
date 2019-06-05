@@ -21,6 +21,17 @@ public class App {
 
         List<Object> result = con.listConvert();
 
-        System.out.println(result);
+        System.out.println("단순 변환 List : " + result);
+
+        String convertString = con.mapObjectConvert();
+
+        System.out.println("변환 전 문자열 : " + convertString);
+        System.out.println();
+        List<Map<String, Object>> compleList = con.onResultMsgConvertList(convertString);
+
+        System.out.println("변환된 문자열의 크기 : " + compleList.size());
+
+        compleList.stream()
+                  .forEach(System.out::println);
     }
 }
