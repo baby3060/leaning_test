@@ -87,15 +87,13 @@ public class GsonTest {
     public void innerConvert() {
         Student student = new Student("101", "학생1", 15, 2);
         
-        Student.Results results = student.new Results();
+        Results results = new Results();
 
         results.setKorean(80);
         results.setMath(88);
         results.setEnglish(100);
 
         student.setResults(results);
-
-
     }
 
     private String makeJsonString() {

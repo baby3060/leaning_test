@@ -33,14 +33,4 @@ public class Student {
         this.results = results;
     }
 
-    @Setter
-    @Getter
-    @ToString
-    @EqualsAndHashCode
-    public class Results {
-        private int korean;
-        private int math;
-        private int english;
-    }
-
 }

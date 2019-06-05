@@ -19,6 +19,8 @@ public class App {
     public static void main(String[] args) {
         GensonConverter con = new GensonConverter();
 
-        con.convertComplexNoParsing();
+        List<Object> result = con.listConvert();
+
+        System.out.println(result);
     }
 }

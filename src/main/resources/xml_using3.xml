@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<sqlMap>
+    <gubun name="user">
+        <sql key="insertUser">Insert Into USER</sql>
+        <sql key="updateUser">Update USER</sql>
+        <sql key="deleteUser">Delete From USER</sql>
+    </gubun>
+
+    <gubun name="confirm">
+        <sql key="insertConfirm">Insert Into CONFIRM</sql>
+        <sql key="updateConfirm">Update CONFIRM</sql>
+        <sql key="deleteConfirm">Delete From CONFIRM</sql>
+    </gubun>
+</sqlMap>

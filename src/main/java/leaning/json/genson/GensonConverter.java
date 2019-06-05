@@ -1,5 +1,7 @@
 package json.genson;
 
+import json.Student;
+
 import java.io.*;
 
 import java.util.*;
@@ -9,6 +11,31 @@ import com.owlike.genson.Genson;
 import com.owlike.genson.GenericType;
 
 public class GensonConverter {
+
+    public List<Object> listConvert() {
+        Genson genson = new Genson();
+        List<Object> result = genson.deserialize("[{\"age\" : 28, \"name\" : \"Foo\"}, {\"age\" : 29, \"name\" : \"Hoo\"}]", List.class);
+        return result;
+    }
+
+    // 단순 변환
+    public Student simpleConvert() {
+        Genson genson = new Genson();
+        Student student = new Student();
+        ClassLoader classLoader = getClass().getClassLoader();
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File( classLoader.getResource("sample.json").getFile())),"UTF8"));
+            
+            student = genson.deserialize(reader, Student.class);
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try { reader.close(); } catch(Exception E){}
+        }
+
+        return student;
+    }
 
     /**
      * 억지로 파싱
