@@ -40,7 +40,7 @@ public class GensonConverter {
             nameInt = random.nextInt(27) + 67;
 
             resultMap.put("age", randInt);
-            resultMap.put("name", new Character((char)nameInt).toString() + "oo" );
+            resultMap.put("name", Character.toString((char)nameInt) + "oo" );
 
             resultList.add(resultMap);
         }
