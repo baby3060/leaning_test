@@ -65,5 +65,7 @@
 ## NOSQL
 
 ### MongoDB
-
+> replaceOne : 저장되어 있는 데이터 자체를 바꿈
+> updateOne : 저장되어 있는 데이터의 내용을 바꿈
+>> updateOne과 replaceOne 둘 모두 가장 마지막에 UpdateOptions를 넣고, upsert true로 설정하면 일치하는 데이터 없을 시 해당 데이터 새로 Insert
 ### Redis(Jedis)
